@@ -1,6 +1,6 @@
- from django.db import models
- from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
- from django.conf import settings
+from django.db import models
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+from django.conf import settings
 
 def upload_avator_path(instance, filename):
     ext = filename.spilit('.')[-1]
@@ -33,8 +33,8 @@ class UserManager(BaseUserManager):
 class User(AbstractBaseUser, PermissionsMixin):
 
     email = models.EmailField(max_length=50, unique=True)
-    is_ative = models.BooleanField(default=True)
-    as_staff = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
+    is_staff = models.BooleanField(default=False)
 
     objects = UserManager()
 
@@ -49,7 +49,7 @@ class Profile(models.Model):
         settings.AUTH_USER_MODEL, related_name='userprofile', on_delete=models.CASCADE
     )
     created_on = models.DateTimeField(auto_now_add=True)
-    img = models.ImageField(blank=True, null=True, upload_to=upload_avatar_path)
+    img = models.ImageField(blank=True, null=True, upload_to=upload_avator_path)
 
     def __str__(self):
         return self.nickName
